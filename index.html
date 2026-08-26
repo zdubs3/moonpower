@@ -1,0 +1,548 @@
+<title>Moon Power</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root {
+    --paper: #F2F4EF;
+    --paper-raised: #FFFFFF;
+    --ink: #1C2320;
+    --ink-soft: #46524A;
+    --ink-faint: #798479;
+    --line: #DCE1D8;
+    --field: #24312B;
+    --field-soft: #3C4E44;
+    --barn: #A34A2E;
+    --barn-soft: #C97A57;
+    --harvest: #C7912F;
+    --harvest-bg: #FBF1DE;
+    --shadow: 0 1px 2px rgba(28,35,32,0.05), 0 12px 28px -14px rgba(28,35,32,0.18);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #161C18;
+      --paper-raised: #1E2621;
+      --ink: #E9EDE7;
+      --ink-soft: #B7C2B8;
+      --ink-faint: #7C8A7C;
+      --line: #303B32;
+      --field: #A9C4B4;
+      --field-soft: #7FA08C;
+      --barn: #E0916D;
+      --barn-soft: #C97A57;
+      --harvest: #E3B15E;
+      --harvest-bg: #2A2011;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #161C18;
+    --paper-raised: #1E2621;
+    --ink: #E9EDE7;
+    --ink-soft: #B7C2B8;
+    --ink-faint: #7C8A7C;
+    --line: #303B32;
+    --field: #A9C4B4;
+    --field-soft: #7FA08C;
+    --barn: #E0916D;
+    --barn-soft: #C97A57;
+    --harvest: #E3B15E;
+    --harvest-bg: #2A2011;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: 'Work Sans', system-ui, sans-serif; line-height: 1.6;
+  }
+  ::selection { background: var(--harvest-bg); }
+  img, svg { max-width: 100%; }
+  .container { max-width: 980px; margin: 0 auto; padding: 0 1.5rem; }
+
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; text-wrap: balance; margin: 0; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: var(--field);
+    color: #EEF3EC;
+    padding: 5.5rem 0 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .container { position: relative; z-index: 2; }
+  .hero-orb {
+    position: absolute; border-radius: 50%; opacity: 0.9;
+  }
+  .orb-moon { width: 220px; height: 220px; background: #E9DCB8; top: -40px; right: 6%; }
+  .orb-moon::after {
+    content: ''; position: absolute; width: 220px; height: 220px; border-radius: 50%;
+    background: var(--field); top: 0; left: -70px;
+  }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--harvest); margin-bottom: 1.1rem; display: block;
+  }
+  .hero h1 {
+    font-weight: 500; font-size: clamp(2.4rem, 5.5vw, 3.6rem); line-height: 1.08;
+    max-width: 14ch; margin-bottom: 1.3rem;
+  }
+  .hero .lede {
+    font-size: 1.18rem; color: #C9D3C6; max-width: 46ch; margin-bottom: 2.2rem;
+  }
+  .hero .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    font-family: 'Work Sans', sans-serif; font-weight: 600; font-size: 0.98rem;
+    padding: 0.85rem 1.6rem; border-radius: 6px; text-decoration: none;
+    display: inline-block; border: 1.5px solid transparent; cursor: pointer;
+  }
+  .btn-primary { background: var(--harvest); color: #2A1F08; }
+  .btn-ghost { border-color: rgba(238,243,236,0.35); color: #EEF3EC; }
+
+  /* ---------- OFFER STRIP ---------- */
+  .offer-strip {
+    background: var(--barn); color: #FCEEE6;
+    padding: 1.1rem 0;
+  }
+  .offer-strip .container { display: flex; gap: 2.5rem; flex-wrap: wrap; justify-content: center; align-items: center; }
+  .offer-strip .item { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; letter-spacing: 0.02em; }
+
+  /* ---------- UNIT VISUAL ---------- */
+  .unit-visual {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 2.4rem; align-items: center;
+  }
+  @media (max-width: 760px) { .unit-visual { grid-template-columns: 1fr; } }
+  .unit-svg-wrap {
+    background: linear-gradient(180deg, #DCE8DC 0%, #C9DBC6 60%, #A9C09E 100%);
+    border-radius: 12px; padding: 1.2rem; box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .unit-svg-wrap { background: linear-gradient(180deg, #1F2A22 0%, #202E24 60%, #23331F 100%); }
+  }
+  :root[data-theme="dark"] .unit-svg-wrap { background: linear-gradient(180deg, #1F2A22 0%, #202E24 60%, #23331F 100%); }
+  .unit-facts { display: flex; flex-direction: column; gap: 0.9rem; }
+  .unit-facts .fact { display: flex; gap: 0.7rem; align-items: baseline; }
+  .unit-facts .fact .fk { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--barn); min-width: 6.5rem; }
+  .unit-facts .fact .fv { color: var(--ink-soft); font-size: 0.96rem; }
+
+  /* ---------- WASTE LIST ---------- */
+  .waste-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+  .waste-card {
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 10px;
+    padding: 1.4rem 1.5rem;
+  }
+  .waste-card h4 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.08rem; color: var(--ink); margin: 0 0 0.6rem 0; }
+  .waste-card ul { margin: 0; padding-left: 1.1rem; color: var(--ink-soft); font-size: 0.92rem; }
+  .waste-card li { margin-bottom: 0.3rem; }
+  .waste-note {
+    margin-top: 1.4rem; padding: 1rem 1.3rem; background: var(--harvest-bg); border-radius: 8px;
+    color: var(--ink-soft); font-size: 0.92rem; max-width: 68ch;
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block { padding: 4.5rem 0; }
+  section.block.raised { background: var(--paper-raised); }
+  .section-head { max-width: 62ch; margin-bottom: 2.6rem; }
+  .section-head .kicker {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--barn); margin-bottom: 0.7rem; display: block;
+  }
+  .section-head h2 { font-size: clamp(1.7rem, 3.5vw, 2.2rem); font-weight: 500; color: var(--ink); }
+  .section-head p { color: var(--ink-soft); font-size: 1.05rem; margin-top: 0.8rem; }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.6rem; }
+  .step-card {
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 10px;
+    padding: 1.8rem 1.6rem; box-shadow: var(--shadow);
+  }
+  .step-card .step-num {
+    font-family: 'Fraunces', serif; font-style: italic; font-size: 2.4rem; color: var(--harvest);
+    line-height: 1; margin-bottom: 0.8rem;
+  }
+  .step-card h3 { font-size: 1.2rem; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem; }
+  .step-card p { color: var(--ink-soft); font-size: 0.96rem; margin: 0; }
+
+  /* ---------- NUMBERS ---------- */
+  .numbers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.3rem; }
+  .num-card {
+    border: 1px solid var(--line); border-radius: 10px; padding: 1.5rem 1.4rem;
+    background: var(--paper-raised);
+  }
+  .num-card .big {
+    font-family: 'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums;
+    font-size: 2rem; font-weight: 600; color: var(--field-soft); display: block; margin-bottom: 0.3rem;
+  }
+  .num-card .cap { color: var(--ink-faint); font-size: 0.88rem; }
+
+  /* ---------- RECIPROCAL OFFER ---------- */
+  .split {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem;
+  }
+  @media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
+  .split-card {
+    border-radius: 12px; padding: 2rem;
+  }
+  .split-card.give { background: var(--field); color: #EEF3EC; }
+  .split-card.get { background: var(--harvest-bg); color: var(--ink); border: 1px solid var(--line); }
+  .split-card h3 {
+    font-size: 1.3rem; font-weight: 500; margin-bottom: 1rem;
+  }
+  .split-card.give h3 { color: var(--harvest); }
+  .split-card.get h3 { color: var(--barn); }
+  .split-card ul { padding-left: 1.2rem; margin: 0; }
+  .split-card.give ul { color: #C9D3C6; }
+  .split-card.get ul { color: var(--ink-soft); }
+  .split-card li { margin-bottom: 0.55rem; }
+
+  /* ---------- SITE FIT ---------- */
+  .fit-list { display: flex; flex-direction: column; gap: 0.7rem; }
+  .fit-row {
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    padding: 0.9rem 1.2rem; background: var(--paper-raised); border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .fit-row .name { font-weight: 600; color: var(--ink); }
+  .fit-row .why { color: var(--ink-faint); font-size: 0.88rem; text-align: right; max-width: 46%; }
+
+  h3.tier-head {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--barn); font-weight: 500;
+    margin: 2.4rem 0 0.9rem 0;
+  }
+  h3.tier-head:first-of-type { margin-top: 0.4rem; }
+
+  .display-split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.2rem; align-items: start; }
+  @media (max-width: 700px) { .display-split { grid-template-columns: 1fr; } }
+  .display-copy p { color: var(--ink-soft); margin: 0 0 1rem 0; }
+  .display-copy p:last-child { margin-bottom: 0; }
+  .display-facts { display: flex; flex-direction: column; gap: 0.9rem; background: var(--paper-raised); border: 1px solid var(--line); border-radius: 10px; padding: 1.4rem 1.5rem; }
+  .display-facts .fact { display: flex; flex-direction: column; gap: 0.15rem; }
+  .display-facts .fk { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--harvest); }
+  .display-facts .fv { color: var(--ink-soft); font-size: 0.9rem; }
+
+  /* ---------- WORDMARK ---------- */
+  .wordmark {
+    font-family: 'Fraunces', serif; font-weight: 500; font-style: italic;
+    font-size: 1.05rem; color: var(--harvest); letter-spacing: 0.01em;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta-block {
+    background: var(--field); color: #EEF3EC; padding: 4.5rem 0; text-align: left;
+  }
+  .cta-block h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 500; max-width: 18ch; color: #FFFFFF; margin-bottom: 1rem; }
+  .cta-block p { color: #C9D3C6; max-width: 50ch; font-size: 1.05rem; margin-bottom: 1.8rem; }
+
+  footer { padding: 2.5rem 0 3rem; color: var(--ink-faint); font-size: 0.85rem; }
+  footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; }
+
+  /* ---------- ORIGIN STORY ---------- */
+  .story {
+    background: var(--field); color: #DCE5DA; padding: 4.5rem 0;
+  }
+  .story .container { max-width: 680px; }
+  .story .kicker { color: var(--harvest); }
+  .story p.myth {
+    font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 400;
+    font-size: clamp(1.15rem, 2.4vw, 1.4rem); line-height: 1.65; color: #EEF3EC;
+    margin: 0 0 1.3rem 0; text-wrap: pretty;
+  }
+  .story p.myth:last-of-type { margin-bottom: 0; }
+  .story .signoff {
+    margin-top: 1.8rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem;
+    letter-spacing: 0.05em; color: var(--harvest); text-transform: uppercase;
+  }
+</style>
+
+<header class="hero">
+  <div class="hero-orb orb-moon"></div>
+  <div class="container">
+    <span class="eyebrow wordmark">Moon Power</span>
+    <h1>We take your waste. You get free electricity.</h1>
+    <p class="lede">A self-contained unit — a living organism, working around the clock — installed at your farm, brewery, or processing site, fed by the organic waste you already pay to haul away.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#contact">Talk to us about your site</a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
+    </div>
+  </div>
+</header>
+
+<div class="offer-strip">
+  <div class="container">
+    <span class="item">NO PURCHASED FUEL</span>
+    <span class="item">NO WASTE HAULING BILL</span>
+    <span class="item">RUNS AROUND THE CLOCK</span>
+    <span class="item">PATENT-CHECKED DESIGN</span>
+  </div>
+</div>
+
+<section class="story">
+  <div class="container">
+    <span class="kicker">Why we're called Moon Power</span>
+    <p class="myth">Before the moon we know — the one that swells and thins, that borrows its glow from the sun and hands it back each night — there was a first moon.</p>
+    <p class="myth">The first moon needed nothing lent to it. It burned with a light of its own, steady, whole, never waxing, never waning. It stood beside a sun far larger than itself, and in that difference it saw a lack that wasn't there. It measured its own light against a fire it was never built to match — and began to dim itself, until what it showed the night sky was no longer its own light at all, only ever a reflection.</p>
+    <p class="myth">We found what the first moon had. A natural living organism, ours alone, that gives off real power on its own terms — any hour, day or night, needing no sun to hand it something to give back.</p>
+    <div class="signoff">— the light that doesn't wait for the sun</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">What arrives at your property</span>
+      <h2>One standard shipping container, nothing else</h2>
+      <p>A factory-built 40-ft shipping container with the living system sealed inside — no panels, no separate power source, just the container itself. It sits on a small pad near your existing waste source; no new buildings, no ongoing construction.</p>
+    </div>
+    <div class="unit-visual">
+      <div class="unit-svg-wrap">
+        <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A sealed shipping-container power unit, sitting on a farm property beside a barn, under a crescent moon.">
+          <!-- sky -->
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="var(--field)"/>
+              <stop offset="100%" stop-color="var(--harvest)" stop-opacity="0.35"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="480" height="190" fill="url(#sky)" opacity="0.18"/>
+          <!-- crescent moon -->
+          <circle cx="386" cy="52" r="30" fill="#E9DCB8"/>
+          <circle cx="368" cy="44" r="30" fill="var(--paper)" opacity="0.55"/>
+          <!-- ground -->
+          <rect x="0" y="190" width="480" height="110" fill="var(--field)" opacity="0.28"/>
+          <!-- barn, background -->
+          <g opacity="0.55">
+            <rect x="30" y="150" width="90" height="60" fill="var(--barn)"/>
+            <polygon points="25,150 75,110 125,150" fill="var(--barn-soft)"/>
+            <rect x="65" y="180" width="20" height="30" fill="var(--paper)"/>
+          </g>
+          <!-- container body -->
+          <rect x="150" y="150" width="230" height="90" rx="4" fill="var(--paper-raised)" stroke="var(--ink-faint)" stroke-width="1.5"/>
+          <!-- container ridges -->
+          <g stroke="var(--line)" stroke-width="1.5">
+            <line x1="165" y1="150" x2="165" y2="240"/>
+            <line x1="185" y1="150" x2="185" y2="240"/>
+            <line x1="205" y1="150" x2="205" y2="240"/>
+            <line x1="225" y1="150" x2="225" y2="240"/>
+            <line x1="245" y1="150" x2="245" y2="240"/>
+            <line x1="265" y1="150" x2="265" y2="240"/>
+            <line x1="285" y1="150" x2="285" y2="240"/>
+            <line x1="305" y1="150" x2="305" y2="240"/>
+            <line x1="325" y1="150" x2="325" y2="240"/>
+            <line x1="345" y1="150" x2="345" y2="240"/>
+            <line x1="365" y1="150" x2="365" y2="240"/>
+          </g>
+          <!-- door -->
+          <rect x="350" y="160" width="26" height="75" fill="var(--field-soft)" opacity="0.5"/>
+          <!-- vent pipe (biofilter exhaust) on roof -->
+          <g>
+            <rect x="335" y="118" width="14" height="34" rx="2" fill="var(--field-soft)"/>
+            <ellipse cx="342" cy="118" rx="9" ry="4" fill="var(--field)"/>
+          </g>
+          <!-- ground line + shadow -->
+          <ellipse cx="265" cy="243" rx="120" ry="7" fill="var(--ink)" opacity="0.08"/>
+        </svg>
+      </div>
+      <div class="unit-facts">
+        <div class="fact"><span class="fk">Footprint</span><span class="fv">40 ft × 8 ft — one standard container pad, no excavation required</span></div>
+        <div class="fact"><span class="fk">Height</span><span class="fv">Standard shipping-container height — a small roof vent is the only thing that stands out</span></div>
+        <div class="fact"><span class="fk">Connections</span><span class="fv">A feed line from your waste source, plus a power output line to your existing electrical panel</span></div>
+        <div class="fact"><span class="fk">Noise / smell</span><span class="fv">Sealed, oxygen-free system with built-in odor control — not an open compost pile</span></div>
+        <div class="fact"><span class="fk">Visibility</span><span class="fv">Looks like a parked shipping container — familiar, not industrial-looking equipment</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="how">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>Your waste becomes power in three steps</h2>
+    </div>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>You keep making waste</h3>
+        <p>Manure, spent grain, food-process runoff — whatever your site already produces and already pays to have hauled away. Nothing changes about how you operate.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>The unit feeds on it</h3>
+        <p>A living organism, naturally occurring in soil, breaks the waste down and exports electricity directly, continuously, day and night — no combustion, no purchased chemical fuel.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>You use the power</h3>
+        <p>A battery banks the steady output around the clock, then delivers it whenever your site actually draws power — sized to your real usage, not a fixed schedule.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block raised">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">The numbers</span>
+      <h2>What a single unit actually delivers</h2>
+      <p>Figures from the verified engineering model behind this design — real measured performance, not projections.</p>
+    </div>
+    <div class="numbers-grid">
+      <div class="num-card"><span class="big">~12 kWh</span><span class="cap">Delivered per day, per 40-ft unit</span></div>
+      <div class="num-card"><span class="big">3.01 W/m²</span><span class="cap">Verified organism power density</span></div>
+      <div class="num-card"><span class="big">$62/ton</span><span class="cap">What waste disposal typically costs you today</span></div>
+      <div class="num-card"><span class="big">75/75</span><span class="cap">Engineering checks passing on the underlying model</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">The deal</span>
+      <h2>What you give, what you get</h2>
+    </div>
+    <div class="split">
+      <div class="split-card give">
+        <h3>What we need from you</h3>
+        <ul>
+          <li>A continuous organic waste stream — manure, spent grain, food-process wastewater, or similar</li>
+          <li>A small footprint to place the unit</li>
+          <li>A grid or on-site connection to use the power</li>
+        </ul>
+      </div>
+      <div class="split-card get">
+        <h3>What you get</h3>
+        <ul>
+          <li>Free electricity, generated on-site, day and night</li>
+          <li>Reduced or eliminated waste-hauling costs</li>
+          <li>A self-contained, factory-built unit — no ongoing construction</li>
+          <li>A design built on real, patent-checked, non-GMO technology</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block raised">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Exactly what we need</span>
+      <h2>The waste products this runs on</h2>
+      <p>Not a general-purpose trash collector — a specific, organic-rich feed. Here's precisely what the unit is built to take, and from whom.</p>
+    </div>
+    <div class="waste-grid">
+      <div class="waste-card">
+        <h4>Dairy &amp; livestock farms</h4>
+        <ul>
+          <li>Manure (liquid or slurry)</li>
+          <li>Barn washwater</li>
+        </ul>
+      </div>
+      <div class="waste-card">
+        <h4>Breweries &amp; distilleries</h4>
+        <ul>
+          <li>Spent grain</li>
+          <li>Yeast slurry</li>
+          <li>Process rinse water</li>
+        </ul>
+      </div>
+      <div class="waste-card">
+        <h4>Food &amp; beverage processors</h4>
+        <ul>
+          <li>High-organic process wastewater</li>
+          <li>Fruit, vegetable, or dairy processing runoff</li>
+          <li>Stillage (from sugar/ethanol processing)</li>
+        </ul>
+      </div>
+      <div class="waste-card">
+        <h4>Restaurants &amp; food service</h4>
+        <ul>
+          <li>Kitchen food scraps</li>
+          <li>Fryer/grease-trap waste (pre-treated)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="waste-note">
+      <strong>What we can't take directly:</strong> solid trash, plastics, metals, chemicals, or non-organic waste. Complex or solid organic material (like raw food scraps or grain) goes through a simple on-site fermentation step first, breaking it down into the liquid the organism actually feeds on — you don't need to pre-process anything yourself.
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Where it goes</span>
+      <h2>Every scale this fits, from a countertop to a city block</h2>
+      <p>The same core technology, sized differently — the right tier depends on how much waste a site produces and how much space it has.</p>
+    </div>
+
+    <h3 class="tier-head">Container scale — $12,650–$45,124 to build (20-ft / 40-ft)</h3>
+    <div class="fit-list">
+      <div class="fit-row"><span class="name">Dairy farms</span><span class="why">Manure lagoons — concentrated, continuous, already managed</span></div>
+      <div class="fit-row"><span class="name">Breweries &amp; distilleries</span><span class="why">Spent grain and yeast slurry — a proven waste-to-energy feedstock</span></div>
+      <div class="fit-row"><span class="name">Food processing plants</span><span class="why">High-organic wastewater that's already a disposal cost</span></div>
+      <div class="fit-row"><span class="name">Slaughterhouses</span><span class="why">Very high organic load, consistent daily volume</span></div>
+      <div class="fit-row"><span class="name">Coffee &amp; sugar processors</span><span class="why">Concentrated byproduct streams (stillage, wastewater)</span></div>
+      <div class="fit-row"><span class="name">Airports</span><span class="why">Dozens of food vendors clustered on one large property</span></div>
+      <div class="fit-row"><span class="name">Zoos</span><span class="why">Large, concentrated animal waste — same logic as a dairy farm</span></div>
+      <div class="fit-row"><span class="name">Marinas &amp; fishing ports</span><span class="why">Fish processing waste, high organic load</span></div>
+      <div class="fit-row"><span class="name">University campuses</span><span class="why">Dining-hall waste at real scale, plus a research angle</span></div>
+      <div class="fit-row"><span class="name">Hotels &amp; resorts</span><span class="why">Large, consistent food-service operations</span></div>
+      <div class="fit-row"><span class="name">Military bases</span><span class="why">Off-grid resilience is its own motivator, beyond economics</span></div>
+    </div>
+
+    <h3 class="tier-head">Restaurant scale — $4,350–$10,229 to build</h3>
+    <div class="fit-list">
+      <div class="fit-row"><span class="name">Individual restaurants</span><span class="why">One busy restaurant's food waste alone is enough to run a small unit</span></div>
+      <div class="fit-row"><span class="name">Cafés &amp; coffee shops</span><span class="why">Coffee grounds are a documented, real feedstock</span></div>
+      <div class="fit-row"><span class="name">Cafeterias</span><span class="why">School, hospital, and corporate food service</span></div>
+      <div class="fit-row"><span class="name">Grocery stores</span><span class="why">Food spoilage is a continuous, real stream</span></div>
+    </div>
+
+    <h3 class="tier-head">Micro scale — $530–$570 to build</h3>
+    <div class="fit-list">
+      <div class="fit-row"><span class="name">Remote sensors &amp; monitoring equipment</span><span class="why">Off-grid, self-sustaining trickle power</span></div>
+      <div class="fit-row"><span class="name">Schools</span><span class="why">A real working science kit, not just a demo</span></div>
+      <div class="fit-row"><span class="name">Marine buoys</span><span class="why">Real precedent: seabed-sediment living-organism power cells</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block raised" id="display">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">A different kind of tier</span>
+      <h2>A living display, for hotels and restaurants that want the story told</h2>
+      <p>Not sold on economics — sold on the same thing a living wall, a glass-walled kitchen, or a rooftop apiary already is: a real, tellable story a guest remembers.</p>
+    </div>
+    <div class="display-split">
+      <div class="display-copy">
+        <p>A small, transparent-chambered version of the same living system, built to be seen — placed in a lobby, a bar, or a dining room, not tucked away in back. Guests watch the culture at work; a server or concierge tells them what it actually is: a living organism, generating real electricity, from waste, glowing quietly through the night.</p>
+        <p>Priced the way a designer aquarium is priced against a basic tank — for the design and the story, not for kWh. This tier doesn't compete with grid electricity. It doesn't need to.</p>
+      </div>
+      <div class="display-facts">
+        <div class="fact"><span class="fk">Built for</span><span class="fv">Lobbies, bars, dining rooms — wherever guests actually look</span></div>
+        <div class="fact"><span class="fk">Chamber</span><span class="fv">Transparent, lit, visible current and culture — not sealed and hidden</span></div>
+        <div class="fact"><span class="fk">The story</span><span class="fv">Built on the Moon Power origin — a light that doesn't need to borrow from the sun</span></div>
+        <div class="fact"><span class="fk">Pricing</span><span class="fv">Bespoke, by design and placement — ask us directly</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-block" id="contact">
+  <div class="container">
+    <h2>Tell us what your site produces.</h2>
+    <p>Send a short description of your waste stream and your average power draw, and we'll size a unit and walk through the real numbers for your property — no obligation.</p>
+    <a class="btn btn-primary" href="mailto:hello@example.com">Email us about your site</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="wordmark">Moon Power</span>
+    <span>Built on a verified engineering model — technical documentation available on request. Not a vehicle or grid-scale power system.</span>
+  </div>
+</footer>
