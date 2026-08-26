@@ -1,4 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Moon Power</title>
+<link rel="icon" type="image/jpeg" href="emblem.jpg">
+<meta name="description" content="A living organism eats your waste and produces electricity — free power for farms, breweries, restaurants, and cities.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Moon Power">
+<meta property="og:description" content="A living organism eats your waste and produces electricity.">
+<meta property="og:image" content="https://zdubs3.github.io/moonpower/emblem.jpg">
+<meta property="og:url" content="https://zdubs3.github.io/moonpower/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Moon Power">
+<meta name="twitter:description" content="A living organism eats your waste and produces electricity.">
+<meta name="twitter:image" content="https://zdubs3.github.io/moonpower/emblem.jpg">
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
@@ -6,9 +24,9 @@
   :root {
     --paper: #0B0B0D;
     --paper-raised: #18171C;
-    --ink: #EDEDF0;
-    --ink-soft: #B9B6C2;
-    --ink-faint: #7A7684;
+    --ink: #C77DFF;
+    --ink-soft: #7FD9E8;
+    --ink-faint: #6B8A93;
     --line: #322F3A;
     --field: #0B0B0D;
     --field-soft: #201F26;
@@ -29,24 +47,24 @@
   img, svg { max-width: 100%; }
   .container { max-width: 980px; margin: 0 auto; padding: 0 1.5rem; }
 
-  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; text-wrap: balance; margin: 0; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-style: italic; text-wrap: balance; margin: 0; }
 
   /* ---------- HERO ---------- */
   .hero {
     background: var(--field);
-    color: #EEF3EC;
+    color: var(--ink);
     padding: 5.5rem 0 5rem;
     position: relative;
     overflow: hidden;
   }
   .hero .container { position: relative; z-index: 2; }
-  .hero-orb {
-    position: absolute; border-radius: 50%; opacity: 0.9;
+  .emblem {
+    position: absolute; top: -20px; right: 4%; width: 260px; height: 260px;
+    object-fit: cover; border-radius: 50%;
+    box-shadow: 0 0 60px 10px rgba(199,125,255,0.25), 0 0 0 1px rgba(199,125,255,0.3);
   }
-  .orb-moon { width: 220px; height: 220px; background: #E9DCB8; top: 30px; right: 6%; }
-  .orb-moon::after {
-    content: ''; position: absolute; width: 220px; height: 220px; border-radius: 50%;
-    background: var(--field); top: 0; left: -70px;
+  @media (max-width: 700px) {
+    .emblem { position: relative; top: 0; right: 0; width: 160px; height: 160px; margin-bottom: 1.5rem; }
   }
   .eyebrow {
     font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em;
@@ -57,7 +75,7 @@
     max-width: 14ch; margin-bottom: 1.3rem;
   }
   .hero .lede {
-    font-size: 1.18rem; color: #C9D3C6; max-width: 46ch; margin-bottom: 2.2rem;
+    font-size: 1.18rem; color: var(--ink-soft); max-width: 46ch; margin-bottom: 2.2rem;
   }
   .hero .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
   .btn {
@@ -66,7 +84,7 @@
     display: inline-block; border: 1.5px solid transparent; cursor: pointer;
   }
   .btn-primary { background: var(--harvest); color: #2A1F08; }
-  .btn-ghost { border-color: rgba(238,243,236,0.35); color: #EEF3EC; }
+  .btn-ghost { border-color: rgba(199,125,255,0.4); color: var(--ink); }
 
   /* ---------- OFFER STRIP ---------- */
   .offer-strip {
@@ -137,7 +155,7 @@
   }
   .num-card .big {
     font-family: 'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums;
-    font-size: 2rem; font-weight: 600; color: var(--field-soft); display: block; margin-bottom: 0.3rem;
+    font-size: 2rem; font-weight: 600; color: var(--teal); display: block; margin-bottom: 0.3rem;
   }
   .num-card .cap { color: var(--ink-faint); font-size: 0.88rem; }
 
@@ -149,7 +167,7 @@
   .split-card {
     border-radius: 12px; padding: 2rem;
   }
-  .split-card.give { background: var(--field); color: #EEF3EC; }
+  .split-card.give { background: var(--field); color: var(--ink); }
   .split-card.get { background: var(--harvest-bg); color: var(--ink); border: 1px solid var(--line); }
   .split-card h3 {
     font-size: 1.3rem; font-weight: 500; margin-bottom: 1rem;
@@ -157,7 +175,7 @@
   .split-card.give h3 { color: var(--harvest); }
   .split-card.get h3 { color: var(--barn); }
   .split-card ul { padding-left: 1.2rem; margin: 0; }
-  .split-card.give ul { color: #C9D3C6; }
+  .split-card.give ul { color: var(--ink-soft); }
   .split-card.get ul { color: var(--ink-soft); }
   .split-card li { margin-bottom: 0.55rem; }
 
@@ -168,7 +186,7 @@
     padding: 0.9rem 1.2rem; background: var(--paper-raised); border: 1px solid var(--line);
     border-radius: 8px;
   }
-  .fit-row .name { font-weight: 600; color: var(--ink); }
+  .fit-row .name { font-weight: 600; color: var(--teal); }
   .fit-row .why { color: var(--ink-faint); font-size: 0.88rem; text-align: right; max-width: 46%; }
 
   h3.tier-head {
@@ -195,23 +213,45 @@
 
   /* ---------- CTA ---------- */
   .cta-block {
-    background: var(--field); color: #EEF3EC; padding: 4.5rem 0; text-align: left;
+    background: var(--field); color: var(--ink); padding: 4.5rem 0; text-align: left;
   }
-  .cta-block h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 500; max-width: 18ch; color: #FFFFFF; margin-bottom: 1rem; }
-  .cta-block p { color: #C9D3C6; max-width: 50ch; font-size: 1.05rem; margin-bottom: 1.8rem; }
+  .cta-block h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 500; max-width: 18ch; color: var(--ink); margin-bottom: 1rem; }
+  .cta-block p { color: var(--ink-soft); max-width: 50ch; font-size: 1.05rem; margin-bottom: 1.8rem; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.1rem; max-width: 520px; margin-top: 0.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field label {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--teal);
+  }
+  .field input, .field select, .field textarea {
+    background: var(--field-soft); border: 1px solid var(--line); border-radius: 6px;
+    padding: 0.7rem 0.85rem; color: var(--ink); font-family: 'Work Sans', sans-serif;
+    font-size: 0.96rem; outline: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--teal); }
+  .field textarea { resize: vertical; min-height: 90px; }
+  .form-submit {
+    font-family: 'Work Sans', sans-serif; font-weight: 600; font-size: 0.98rem;
+    padding: 0.85rem 1.6rem; border-radius: 6px; border: none; cursor: pointer;
+    background: var(--harvest); color: #1A0C24; width: fit-content;
+  }
+  .form-note { font-size: 0.82rem; color: var(--ink-faint); margin-top: -0.3rem; }
 
   footer { padding: 2.5rem 0 3rem; color: var(--ink-faint); font-size: 0.85rem; }
   footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; }
 
   /* ---------- ORIGIN STORY ---------- */
   .story {
-    background: var(--field); color: #DCE5DA; padding: 4.5rem 0;
+    background: var(--field); color: var(--ink-soft); padding: 4.5rem 0;
   }
   .story .container { max-width: 680px; }
   .story .kicker { color: var(--harvest); }
   .story p.myth {
     font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 400;
-    font-size: clamp(1.15rem, 2.4vw, 1.4rem); line-height: 1.65; color: #EEF3EC;
+    font-size: clamp(1.15rem, 2.4vw, 1.4rem); line-height: 1.65; color: var(--ink);
     margin: 0 0 1.3rem 0; text-wrap: pretty;
   }
   .story p.myth:last-of-type { margin-bottom: 0; }
@@ -220,9 +260,11 @@
     letter-spacing: 0.05em; color: var(--harvest); text-transform: uppercase;
   }
 </style>
+</head>
+<body>
 
 <header class="hero">
-  <div class="hero-orb orb-moon"></div>
+  <img class="emblem" src="emblem.jpg" alt="Moon Power emblem — a golden moon over a waterfall">
   <div class="container">
     <span class="eyebrow wordmark">Moon Power</span>
     <h1>A living organism eats your waste and produces electricity.</h1>
@@ -487,7 +529,46 @@
   <div class="container">
     <h2>Tell us what your site produces.</h2>
     <p>Send a short description of your waste stream and your average power draw, and we'll size a unit and walk through the real numbers for your property — no obligation.</p>
-    <a class="btn btn-primary" href="mailto:hello@example.com">Email us about your site</a>
+
+    <!--
+      SETUP REQUIRED: this form posts to Formspree, a form-backend service for
+      static sites (GitHub Pages has no server of its own to receive submissions).
+      1. Go to https://formspree.io and create a free account using zachwohl494@gmail.com
+      2. Create a new form -- Formspree gives you a form ID like "myzngkjq"
+      3. Replace YOUR_FORM_ID below with that real ID
+      Until that's done, this form will not deliver submissions anywhere.
+    -->
+    <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-row">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="site-type">Site type</label>
+        <select id="site-type" name="site type">
+          <option value="Dairy farm">Dairy farm</option>
+          <option value="Brewery / distillery">Brewery / distillery</option>
+          <option value="Food processing plant">Food processing plant</option>
+          <option value="Restaurant / cafe">Restaurant / café</option>
+          <option value="Hotel / hospitality">Hotel / hospitality</option>
+          <option value="Municipality">Municipality</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Tell us about your waste stream and power needs</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <input type="hidden" name="_subject" value="New Moon Power site inquiry">
+      <button type="submit" class="form-submit">Send</button>
+      <p class="form-note">Sent directly to our team — no obligation, no spam.</p>
+    </form>
   </div>
 </section>
 
@@ -497,3 +578,6 @@
     <span>Built on a verified engineering model — technical documentation available on request. Not a vehicle or grid-scale power system.</span>
   </div>
 </footer>
+
+</body>
+</html>
