@@ -4,51 +4,20 @@
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
   :root {
-    --paper: #F2F4EF;
-    --paper-raised: #FFFFFF;
-    --ink: #1C2320;
-    --ink-soft: #46524A;
-    --ink-faint: #798479;
-    --line: #DCE1D8;
-    --field: #24312B;
-    --field-soft: #3C4E44;
-    --barn: #A34A2E;
-    --barn-soft: #C97A57;
-    --harvest: #C7912F;
-    --harvest-bg: #FBF1DE;
-    --shadow: 0 1px 2px rgba(28,35,32,0.05), 0 12px 28px -14px rgba(28,35,32,0.18);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper: #161C18;
-      --paper-raised: #1E2621;
-      --ink: #E9EDE7;
-      --ink-soft: #B7C2B8;
-      --ink-faint: #7C8A7C;
-      --line: #303B32;
-      --field: #A9C4B4;
-      --field-soft: #7FA08C;
-      --barn: #E0916D;
-      --barn-soft: #C97A57;
-      --harvest: #E3B15E;
-      --harvest-bg: #2A2011;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.5);
-    }
-  }
-  :root[data-theme="dark"] {
-    --paper: #161C18;
-    --paper-raised: #1E2621;
-    --ink: #E9EDE7;
-    --ink-soft: #B7C2B8;
-    --ink-faint: #7C8A7C;
-    --line: #303B32;
-    --field: #A9C4B4;
-    --field-soft: #7FA08C;
-    --barn: #E0916D;
-    --barn-soft: #C97A57;
-    --harvest: #E3B15E;
-    --harvest-bg: #2A2011;
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.5);
+    --paper: #0B0B0D;
+    --paper-raised: #18171C;
+    --ink: #EDEDF0;
+    --ink-soft: #B9B6C2;
+    --ink-faint: #7A7684;
+    --line: #322F3A;
+    --field: #0B0B0D;
+    --field-soft: #201F26;
+    --barn: #E8102F;
+    --barn-soft: #FF3352;
+    --harvest: #C77DFF;
+    --harvest-bg: #221530;
+    --teal: #22D3EE;
+    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 28px -14px rgba(0,0,0,0.7);
   }
 
   * { box-sizing: border-box; }
@@ -74,7 +43,7 @@
   .hero-orb {
     position: absolute; border-radius: 50%; opacity: 0.9;
   }
-  .orb-moon { width: 220px; height: 220px; background: #E9DCB8; top: -40px; right: 6%; }
+  .orb-moon { width: 220px; height: 220px; background: #E9DCB8; top: 30px; right: 6%; }
   .orb-moon::after {
     content: ''; position: absolute; width: 220px; height: 220px; border-radius: 50%;
     background: var(--field); top: 0; left: -70px;
@@ -113,14 +82,10 @@
   }
   @media (max-width: 760px) { .unit-visual { grid-template-columns: 1fr; } }
   .unit-svg-wrap {
-    background: linear-gradient(180deg, #DCE8DC 0%, #C9DBC6 60%, #A9C09E 100%);
+    background: linear-gradient(180deg, #16121E 0%, #1A1420 55%, #140B14 100%);
     border-radius: 12px; padding: 1.2rem; box-shadow: var(--shadow);
     border: 1px solid var(--line);
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .unit-svg-wrap { background: linear-gradient(180deg, #1F2A22 0%, #202E24 60%, #23331F 100%); }
-  }
-  :root[data-theme="dark"] .unit-svg-wrap { background: linear-gradient(180deg, #1F2A22 0%, #202E24 60%, #23331F 100%); }
   .unit-facts { display: flex; flex-direction: column; gap: 0.9rem; }
   .unit-facts .fact { display: flex; gap: 0.7rem; align-items: baseline; }
   .unit-facts .fact .fk { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--barn); min-width: 6.5rem; }
@@ -260,31 +225,19 @@
   <div class="hero-orb orb-moon"></div>
   <div class="container">
     <span class="eyebrow wordmark">Moon Power</span>
-    <h1>We take your waste. You get free electricity.</h1>
-    <p class="lede">A self-contained unit — a living organism, working around the clock — installed at your farm, brewery, or processing site, fed by the organic waste you already pay to haul away.</p>
+    <h1>A living organism eats your waste and produces electricity.</h1>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#contact">Talk to us about your site</a>
       <a class="btn btn-ghost" href="#how">See how it works</a>
     </div>
   </div>
 </header>
-
-<div class="offer-strip">
-  <div class="container">
-    <span class="item">NO PURCHASED FUEL</span>
-    <span class="item">NO WASTE HAULING BILL</span>
-    <span class="item">RUNS AROUND THE CLOCK</span>
-    <span class="item">PATENT-CHECKED DESIGN</span>
-  </div>
-</div>
 
 <section class="story">
   <div class="container">
     <span class="kicker">Why we're called Moon Power</span>
     <p class="myth">Before the moon we know — the one that swells and thins, that borrows its glow from the sun and hands it back each night — there was a first moon.</p>
     <p class="myth">The first moon needed nothing lent to it. It burned with a light of its own, steady, whole, never waxing, never waning. It stood beside a sun far larger than itself, and in that difference it saw a lack that wasn't there. It measured its own light against a fire it was never built to match — and began to dim itself, until what it showed the night sky was no longer its own light at all, only ever a reflection.</p>
-    <p class="myth">We found what the first moon had. A natural living organism, ours alone, that gives off real power on its own terms — any hour, day or night, needing no sun to hand it something to give back.</p>
-    <div class="signoff">— the light that doesn't wait for the sun</div>
+    <p class="myth">We found a natural living organism which produces electricity in the spirit of the original moon.</p>
   </div>
 </section>
 
@@ -310,17 +263,17 @@
           <circle cx="386" cy="52" r="30" fill="#E9DCB8"/>
           <circle cx="368" cy="44" r="30" fill="var(--paper)" opacity="0.55"/>
           <!-- ground -->
-          <rect x="0" y="190" width="480" height="110" fill="var(--field)" opacity="0.28"/>
+          <rect x="0" y="190" width="480" height="110" fill="#2A2433" opacity="0.7"/>
           <!-- barn, background -->
-          <g opacity="0.55">
+          <g opacity="0.75">
             <rect x="30" y="150" width="90" height="60" fill="var(--barn)"/>
             <polygon points="25,150 75,110 125,150" fill="var(--barn-soft)"/>
-            <rect x="65" y="180" width="20" height="30" fill="var(--paper)"/>
+            <rect x="65" y="180" width="20" height="30" fill="#140B14"/>
           </g>
           <!-- container body -->
-          <rect x="150" y="150" width="230" height="90" rx="4" fill="var(--paper-raised)" stroke="var(--ink-faint)" stroke-width="1.5"/>
+          <rect x="150" y="150" width="230" height="90" rx="4" fill="#D8D5DE" stroke="#4A4658" stroke-width="1.5"/>
           <!-- container ridges -->
-          <g stroke="var(--line)" stroke-width="1.5">
+          <g stroke="#9B96A8" stroke-width="1.5">
             <line x1="165" y1="150" x2="165" y2="240"/>
             <line x1="185" y1="150" x2="185" y2="240"/>
             <line x1="205" y1="150" x2="205" y2="240"/>
@@ -341,7 +294,7 @@
             <ellipse cx="342" cy="118" rx="9" ry="4" fill="var(--field)"/>
           </g>
           <!-- ground line + shadow -->
-          <ellipse cx="265" cy="243" rx="120" ry="7" fill="var(--ink)" opacity="0.08"/>
+          <ellipse cx="265" cy="243" rx="120" ry="7" fill="#000000" opacity="0.35"/>
         </svg>
       </div>
       <div class="unit-facts">
@@ -391,8 +344,6 @@
     <div class="numbers-grid">
       <div class="num-card"><span class="big">~12 kWh</span><span class="cap">Delivered per day, per 40-ft unit</span></div>
       <div class="num-card"><span class="big">3.01 W/m²</span><span class="cap">Verified organism power density</span></div>
-      <div class="num-card"><span class="big">$62/ton</span><span class="cap">What waste disposal typically costs you today</span></div>
-      <div class="num-card"><span class="big">75/75</span><span class="cap">Engineering checks passing on the underlying model</span></div>
     </div>
   </div>
 </section>
@@ -409,7 +360,7 @@
         <ul>
           <li>A continuous organic waste stream — manure, spent grain, food-process wastewater, or similar</li>
           <li>A small footprint to place the unit</li>
-          <li>A grid or on-site connection to use the power</li>
+          <li>A grid or on-site connection to use the power the unit produces daily naturally</li>
         </ul>
       </div>
       <div class="split-card get">
@@ -418,7 +369,7 @@
           <li>Free electricity, generated on-site, day and night</li>
           <li>Reduced or eliminated waste-hauling costs</li>
           <li>A self-contained, factory-built unit — no ongoing construction</li>
-          <li>A design built on real, patent-checked, non-GMO technology</li>
+          <li>A design built on real, non-GMO technology</li>
         </ul>
       </div>
     </div>
