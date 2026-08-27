@@ -39,15 +39,12 @@
   }
 
   * { box-sizing: border-box; }
+  html {
+    background: #0B0B0D url('emblem.jpg') center/contain no-repeat fixed;
+  }
   body {
     margin: 0; background: transparent; color: var(--ink);
     font-family: 'Work Sans', system-ui, sans-serif; line-height: 1.6;
-    position: relative;
-  }
-  body::before {
-    content: ''; position: fixed; inset: 0; z-index: -1;
-    background: url('emblem.jpg') center 20%/cover no-repeat fixed;
-    filter: brightness(0.35) saturate(0.9);
   }
   ::selection { background: var(--harvest-bg); }
   img, svg { max-width: 100%; }
