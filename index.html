@@ -42,6 +42,7 @@
   html {
     background: #0B0B0D url('emblem.jpg') center/contain no-repeat fixed;
   }
+  .symbol-mark { display: block; width: 130px; height: 130px; margin: 0 auto 1.8rem; }
   body {
     margin: 0; background: transparent; color: var(--ink);
     font-family: 'Work Sans', system-ui, sans-serif; line-height: 1.6;
@@ -260,6 +261,24 @@
 
 <header class="hero">
   <div class="container">
+    <svg class="symbol-mark" viewBox="0 0 160 160" aria-hidden="true">
+      <defs>
+        <linearGradient id="yudGradMain" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--harvest)"/>
+          <stop offset="50%" stop-color="var(--teal)"/>
+          <stop offset="100%" stop-color="var(--barn)"/>
+        </linearGradient>
+      </defs>
+      <circle cx="80" cy="80" r="74" fill="none" stroke="var(--harvest)" stroke-width="1" opacity="0.22"/>
+      <circle cx="80" cy="80" r="64" fill="none" stroke="var(--teal)" stroke-width="1" opacity="0.22"/>
+      <circle cx="80" cy="80" r="54" fill="none" stroke="var(--barn)" stroke-width="1" opacity="0.22"/>
+      <circle cx="80" cy="80" r="44" fill="none" stroke="var(--harvest)" stroke-width="1" opacity="0.28"/>
+      <circle cx="80" cy="80" r="34" fill="none" stroke="var(--teal)" stroke-width="1" opacity="0.28"/>
+      <ellipse cx="80" cy="80" rx="24" ry="9.5" fill="none" stroke="var(--harvest)" stroke-width="3.2" transform="rotate(0 80 80)"/>
+      <ellipse cx="80" cy="80" rx="24" ry="9.5" fill="none" stroke="var(--teal)" stroke-width="3.2" transform="rotate(60 80 80)"/>
+      <ellipse cx="80" cy="80" rx="24" ry="9.5" fill="none" stroke="var(--barn)" stroke-width="3.2" transform="rotate(120 80 80)"/>
+      <path transform="translate(80,80) scale(0.47)" d="M-5.50,-8.00 L-5.06,-6.88 L-4.11,-5.73 L0.95,-5.96 L2.61,-5.59 L3.97,-4.37 L5.39,-2.23 L6.04,-0.33 L6.00,2.35 L3.73,7.60 L1.39,7.60 L2.27,3.57 L1.93,2.82 L-2.17,2.92 L-2.65,3.57 L-2.82,4.79 L-3.50,4.79 L-3.97,0.72 L-5.16,-4.95 L-5.12,-6.47 L-5.63,-7.02 L-5.50,-8.00 Z" fill="url(#yudGradMain)"/>
+    </svg>
     <span class="eyebrow wordmark">Moon Power</span>
     <h1>A living organism eats your waste and produces electricity.</h1>
     <div class="cta-row">
